@@ -15,13 +15,13 @@
         <h1>서울 인생 시뮬레이션</h1>
         <div id="input-section">
             <label for="name">이름:</label>
-            <input type="text" id="name" placeholder="이름 입력"><br>
+            <input type="text" id="name" placeholder="이름 입력"><br><br>
             <label>성별:</label>
             <input type="radio" name="gender" value="남성" id="male" checked>
             <label for="male">남성</label>
             <input type="radio" name="gender" value="여성" id="female">
-            <label for="female">여성</label><br>
-            <button onclick="startGame()">게임 시작</button>
+            <label for="female">여성</label><br><br>
+            <button id="start-btn">게임 시작</button>
         </div>
         <div id="game-section" style="display:none;">
             <div id="stats"></div>
@@ -43,7 +43,12 @@
         };
 
         function startGame() {
-            character.name = document.getElementById("name").value;
+            let nameInput = document.getElementById("name").value.trim();
+            if (!nameInput) {
+                alert("이름을 입력해주세요!");
+                return;
+            }
+            character.name = nameInput;
             character.gender = document.querySelector('input[name="gender"]:checked').value;
             
             // 1988~1992년 사이 랜덤 출생
@@ -159,6 +164,8 @@
                 choicesSection.appendChild(button);
             });
         }
+
+        document.getElementById("start-btn").addEventListener("click", startGame);
     </script>
 </body>
 </html>
